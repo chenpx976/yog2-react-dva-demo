@@ -1,49 +1,57 @@
-# yog2-react-redux-demo
+# yog2-react-dva-demo
 
-由 [react-redux examples](https://github.com/reactjs/redux/tree/master/examples/todomvc) 移植生成的适用于 YOG2的 react-redux demo
+## [dva是什么?](https://github.com/dvajs/dva/issues/1)  
 
-实现了 React 的前端编译与后端同构渲染
+> dva 是基于现有应用架构 (redux + react-router + redux-saga 等)的一层轻量封装，没有引入任何新概念，全部代码不到 100 行。
 
-## Usage
+> dva 是 framework，不是 library，类似 emberjs，会很明确地告诉你每个部件应该怎么写，这对于团队而言，会更可控。
 
-> 前置步骤包含启动 YOG2 服务端，可参考 [YOG2文档](http://fex.baidu.com/yog2/docs/)
+> 另外，除了 react 和 react-dom 是 peerDependencies 以外，dva 封装了所有其他依赖。dva 实现上尽量不创建新语法，而是用依赖库本身的语法，比如 router 的定义还是用 react-router 的 JSX 语法的方式(dynamic config 是性能的考虑层面，之后会支持)。他最核心的是提供了 app.model 方法，用于把 reducer, initialState, action, saga 封装到一起
 
-> 要求 YOG2 版本高于1.0.0，服务端 yog2-kernel 版本高于1.0.0
+## 使用体验
 
-```bash
-git clone https://github.com/hefangshi/yog2-react-redux-demo.git
-cd yog2-react-redux-demo
-cd client
-npm i --production # 安装npm前端组件
-cd ..
-yog2 release debug --fis3 # 发布至 YOG2 服务端
+代码结构:
+
 ```
-
-访问浏览器 `http://127.0.0.1:8085` 即可浏览发布结果
-
-## FAQ
-
-Q: 新项目如何使用 NPM / React
-
-A: 仅需在原有的`fis-conf.js`中添加两句配置即可
-
-```javascript
-// 按照 react-redux 的目录规范设置源代码目录
-fis.match('/client/{actions,components,constants,containers,page,reducers,store}/**.{js,es,jsx,ts,tsx}', {
-    parser: fis.plugin('typescript', {
-        module: 1,
-        target: 0
-    }),
-    isJsXLike: true,
-    isMod: true
-});
-
-// 启用npm管理前端组件
-fis.enableNPM({
-    autoPack: true // 使用autoPack可以自动将依赖的npm组件打包合并
-});
+├── README.md
+├── client
+│   ├── components                              # 项目组件
+│   │   ├── MainLayout
+│   │   └── Users
+│   ├── models                                  # 数据模型
+│   │   └── users.js
+│   ├── package.json
+│   ├── page                                    
+│   │   ├── client.js
+│   │   ├── client.less
+│   │   ├── index.tpl                           # 入口文件
+│   │   └── router.js                           # 路由配置
+│   ├── routes                                  # 路由组件（页面纬度）
+│   │   ├── HomePage.jsx
+│   │   ├── HomePage.less
+│   │   ├── NotFound.jsx
+│   │   ├── NotFound.less
+│   │   ├── Users.jsx
+│   │   └── Users.less
+│   ├── services                                # 数据接口
+│   │   └── users.js
+│   ├── static
+│   │   └── js
+│   └── utils                                   # 工具函数
+│       └── request.js
+├── fis-conf.js
+├── jsconfig.json
+├── package.json
+└── server
+    ├── action
+    │   ├── about.js
+    │   ├── api
+    │   └── index.js
+    ├── lib
+    │   ├── reactRenderAction.js
+    │   └── redis.js
+    ├── model                                   # 数据处理
+    │   ├── index.js
+    │   └── users.js                            
+    └── router.js                               # 后端路由
 ```
-
-Q: 有些同构库如 `isomorphic-fetch` 无法使用，报加载错误
-
-A: 由于 YOG2 框架的前后端同构策略是直接加载前端编译产出，而 `isomorphic-fetch` 库的前端代码在加载期就包含了对浏览器端的强依赖，因此无法使用，建议使用[axios](https://github.com/mzabriskie/axios)
