@@ -27,5 +27,5 @@ export default function (router) {
   router.use('/api/todos/:id([0-9]+)$', router.action('api/todos'));
   router.use('/api/todos/:id([0-9]+)/complete', router.action('api/todos/complete'));
   // 可以所有页面使用相同的getInitialState解决初始状态不同步问题
-  // router.all('*', router.action('index'));
+  router.get('*', (req,res) => {res.render('home/page/root/index.tpl')});
 };

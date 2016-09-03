@@ -1,29 +1,26 @@
 {
-  "name": "redux-todomvc-example",
-  "version": "0.0.0",
-  "description": "Redux TodoMVC example",
-  "scripts": {
-    "start": "node server.js",
-    "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js",
-    "test:watch": "npm test -- --watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/reactjs/redux.git"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/reactjs/redux/issues"
-  },
-  "homepage": "http://redux.js.org",
-  "dependencies": {
-    "axios": "^0.12.0",
-    "classnames": "^2.1.2",
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7",
-    "react-redux": "^4.2.1",
-    "react-router": "^2.6.1",
-    "redux": "^3.2.1",
-    "todomvc-app-css": "^2.0.6"
-  }
+    "name": "redux-todomvc-example",
+    "version": "0.0.0",
+    "description": "Redux TodoMVC example",
+    "scripts": {
+        "start": "node server.js",
+        "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js",
+        "test:watch": "npm test -- --watch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/reactjs/redux.git"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/reactjs/redux/issues"
+    },
+    "homepage": "http://redux.js.org",
+    "dependencies": {
+        "axios": "^0.12.0",
+        "classnames": "^2.1.2",
+        "dva": "^1.0.0-beta4",
+        "react": "^15.3.1",
+        "react-dom": "^15.3.1"
+    }
 }
