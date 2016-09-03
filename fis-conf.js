@@ -13,14 +13,14 @@ fis.match('/client/{models,components,services,routes,utils,page}/**.{js,es,jsx,
     isMod: true
 });
 // px2rem
-/*fis.match('/client/**.less', {
+fis.match('/client/**.less', {
     postprocessor: fis.plugin('px2rem', {
         baseDpr: 2,             // base device pixel ratio (default: 2)
         remVersion: true,       // whether to generate rem version (default: true)
         remUnit: 75,            // rem unit value (default: 75)
         remPrecision: 6         // rem precision (default: 6)
     })
-});*/
+});
 
 // 启用npm管理前端组件
 fis.enableNPM({
