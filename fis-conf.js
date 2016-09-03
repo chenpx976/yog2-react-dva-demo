@@ -4,23 +4,23 @@
 fis.config.set('namespace', 'home');
 
 // 按照 react-redux 的目录规范设置源代码目录
-fis.match('/client/{actions,components,constants,routes,containers,page,reducers,store}/**.{js,es,jsx,ts,tsx}', {
+fis.match('/client/{models,components,services,routes,utils,page}/**.{js,es,jsx,ts,tsx}', {
     parser: fis.plugin('babel-5.x', {
         sourceMaps: true,
-        optional: ["es7.decorators", "es7.classProperties"]
+        optional: ["es7.decorators", "es7.classProperties", "runtime", "asyncToGenerator", "es6.destructuring","es6.templateLiterals","es6.parameters","es6.spec.templateLiterals"]
     }),
     isJsXLike: true,
     isMod: true
 });
 // px2rem
-fis.match('/client/**.less', {
+/*fis.match('/client/**.less', {
     postprocessor: fis.plugin('px2rem', {
         baseDpr: 2,             // base device pixel ratio (default: 2)
         remVersion: true,       // whether to generate rem version (default: true)
         remUnit: 75,            // rem unit value (default: 75)
         remPrecision: 6         // rem precision (default: 6)
     })
-});
+});*/
 
 // 启用npm管理前端组件
 fis.enableNPM({

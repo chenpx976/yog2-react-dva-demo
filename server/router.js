@@ -1,31 +1,9 @@
 export default function (router) {
-  router.use((req, res, next) => {
-    let userId = req.cookies.userId;
-    if (!userId) {
-      userId = Math.round(Date.now() + Math.random() * 100);
-      res.cookie('userId', userId);
-    }
-    req.userId = userId;
-    next();
-  });
 
-  router.use((req, res, next) => {
-    res.api = function (data, errno, msg) {
-      if (errno === undefined) {
-        errno = 0;
-      };
-      res.json({
-        errno,
-        data,
-        msg
-      });
-    };
-    next();
-  });
+  router.get('/api/users/', router.wrapAsync(router.action('api/users').get));
+  router.post('/api/users/', router.wrapAsync(router.action('api/users').create));
+  router.delete('/api/users/', router.wrapAsync(router.action('api/users').remove));
+  router.put('/api/users/', router.wrapAsync(router.action('api/users').update));
 
-  router.delete('/api/todos/:id([0-9]+)$', router.action('api/todos').del);
-  router.use('/api/todos/:id([0-9]+)$', router.action('api/todos'));
-  router.use('/api/todos/:id([0-9]+)/complete', router.action('api/todos/complete'));
-  // 可以所有页面使用相同的getInitialState解决初始状态不同步问题
-  router.get('*', (req,res) => {res.render('home/page/root/index.tpl')});
+  router.get('*', (req,res) => {res.render('home/page/index.tpl')});
 };
