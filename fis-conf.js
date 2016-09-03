@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 // fis3-enable
-fis.config.set('namespace', 'home');
+fis.config.set('namespace', 'dva');
 
 // 按照 react-redux 的目录规范设置源代码目录
 fis.match('/client/{models,components,services,routes,utils,page}/**.{js,es,jsx,ts,tsx}', {
