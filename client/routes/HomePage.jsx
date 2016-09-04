@@ -9,6 +9,7 @@ function HomePage() {
       <hr />
       <ul className={styles.list}>
         <li>You can go to <Link to="/users">/users</Link></li>
+        <li>You can go to <Link to="/products">/products</Link></li>
       </ul>
     </div>
   );

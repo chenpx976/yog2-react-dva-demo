@@ -1,8 +1,4 @@
-import dva, { connect } from 'dva';
-import { Router, Route } from 'dva/router';
-import fetch from 'dva/fetch';
-import React from 'react';
-import createLoading from 'dva-loading';
+import dva from 'dva';
 
 // 1. Initialize
 const app = dva();
@@ -12,6 +8,7 @@ const app = dva();
 
 // 3. Model
 app.model(require('../models/users'));
+app.model(require('../models/products'));
 
 // 4. Router
 app.router(require('./router'));

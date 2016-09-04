@@ -30,11 +30,12 @@ export default {
   },
 
   effects: {
-    *query({ payload }, { select, call, put }) {
+    query: function*({ payload }, { select, call, put }) {
       const route = yield select(({ routing }) => routing);
       let routerQuery = {};
       if (route && route.locationBeforeTransitions && route.locationBeforeTransitions.query) {
-        routerQuery = {...route.locationBeforeTransitions.query};
+
+        routerQuery = {...route.locationBeforeTransitions.query };
       }
 
       if (!routerQuery.keyword) {
@@ -66,7 +67,7 @@ export default {
         });
       }
     },
-    *'delete'({ payload }, { call, put }) {
+    'delete': function*({ payload }, { call, put }) {
       yield put({ type: 'showLoading' });
       const { data } = yield call(remove, { id: payload });
       if (data && data.success) {
@@ -76,7 +77,7 @@ export default {
         });
       }
     },
-    *create({ payload }, { call, put }) {
+    create: function*({ payload }, { call, put }) {
       yield put({ type: 'hideModal' });
       yield put({ type: 'showLoading' });
       const { data } = yield call(create, payload);
@@ -87,11 +88,11 @@ export default {
         });
       }
     },
-    *update({ payload }, { select, call, put }) {
+    update: function*({ payload }, { select, call, put }) {
       yield put({ type: 'hideModal' });
       yield put({ type: 'showLoading' });
       const id = yield select(({ users }) => users.currentItem.id);
-      const newUser = { ...payload, id };
+      const newUser = {...payload, id };
       const { data } = yield call(update, newUser);
       if (data && data.success) {
         yield put({
@@ -104,35 +105,35 @@ export default {
 
   reducers: {
     showLoading(state) {
-      return { ...state, loading: true };
+      return {...state, loading: true };
     },
     createSuccess(state, action) {
       const newUser = action.payload;
-      return { ...state, list: [newUser, ...state.list], loading: false };
+      return {...state, list: [newUser, ...state.list], loading: false };
     },
     deleteSuccess(state, action) {
       const id = action.payload;
       const newList = state.list.filter(user => user.id !== id);
-      return { ...state, list: newList, loading: false };
+      return {...state, list: newList, loading: false };
     },
     updateSuccess(state, action) {
       const updateUser = action.payload;
       const newList = state.list.map(user => {
         if (user.id === updateUser.id) {
-          return { ...user, ...updateUser };
+          return {...user, ...updateUser };
         }
         return user;
       });
-      return { ...state, list: newList, loading: false };
+      return {...state, list: newList, loading: false };
     },
     querySuccess(state, action) {
-      return { ...state, ...action.payload, loading: false };
+      return {...state, ...action.payload, loading: false };
     },
     showModal(state, action) {
-      return { ...state, ...action.payload, modalVisible: true };
+      return {...state, ...action.payload, modalVisible: true };
     },
     hideModal(state) {
-      return { ...state, modalVisible: false };
+      return {...state, modalVisible: false };
     },
   }
 

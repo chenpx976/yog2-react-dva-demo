@@ -5,5 +5,7 @@ export default function (router) {
   router.delete('/api/users/', router.wrapAsync(router.action('api/users').remove));
   router.put('/api/users/', router.wrapAsync(router.action('api/users').update));
 
+  router.get('/api/products/', router.wrapAsync(router.action('api/products').get));
+
   router.get('*', (req,res) => {res.render('dva/page/index.tpl')});
 };

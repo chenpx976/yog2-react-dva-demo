@@ -7,7 +7,7 @@ fis.config.set('namespace', 'dva');
 fis.match('/client/{models,components,services,routes,utils,page}/**.{js,es,jsx,ts,tsx}', {
     parser: fis.plugin('babel-5.x', {
         sourceMaps: true,
-        optional: ["es7.decorators", "es7.classProperties", "runtime", "asyncToGenerator", "es6.destructuring","es6.templateLiterals","es6.parameters","es6.spec.templateLiterals"]
+        optional: ["es7.decorators", "es7.classProperties", "runtime", "asyncToGenerator","es6.templateLiterals"]
     }),
     isJsXLike: true,
     isMod: true
